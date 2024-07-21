@@ -1,0 +1,147 @@
+<br><br>
+<br><br>
+<div>
+  <mat-card class="col-md-6 offset-md-3">
+    <mat-card-header>
+      <mat-card-title><h3>Contrat Form</h3></mat-card-title>
+    </mat-card-header>
+    <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="contrat.typeContrat" name="type" required #type="ngModel" [ngClass]="{ 'is-invalid': f.submitted && type.errors }">
+          <mat-option value="" disabled>Choose...</mat-option>
+          <mat-option value="Vente">Vente</mat-option>
+          <mat-option value="Location">Location</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.submitted && type.errors?.['required']">Type is required</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Date Début</b></mat-label>
+        <input matInput [matDatepicker]="dateDebutPicker" [(ngModel)]="contrat.dateDebut" name="dateDebut" required #dateDebut="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dateDebut.errors }">
+        <mat-datepicker-toggle matSuffix [for]="dateDebutPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateDebutPicker></mat-datepicker>
+        <mat-error *ngIf="f.submitted && dateDebut.errors">
+          <div *ngIf="dateDebut.errors['required']">Date Début est requis</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Date Fin</b></mat-label>
+        <input matInput [matDatepicker]="dateFinPicker" [(ngModel)]="contrat.dateFin" name="dateFin" [disabled]="contrat.typeContrat === 'Vente'" required #dateFin="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dateFin.errors }" [min]="contrat.dateDebut | date: 'yyyy-MM-dd'" (ngModelChange)="checkDateFinValidity(dateFin)">
+        <mat-datepicker-toggle matSuffix [for]="dateFinPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateFinPicker></mat-datepicker>
+        <mat-error *ngIf="f.submitted && dateFin.errors">
+          <div *ngIf="dateFin.errors['required']">Date Fin est requis</div>
+          <div *ngIf="dateFin.errors['minDays']">Vous devez choisir au moins 3 jours après la date de début.</div>
+          <div *ngIf="dateFin.value <= dateDebut.value">Date Fin aprés Date Début !</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Montant</b></mat-label>
+        <input matInput type="number" [(ngModel)]="contrat.montant" name="montant" required pattern="[1-9][0-9]*" #montant="ngModel" [ngClass]="{ 'is-invalid': f.submitted && montant.errors }">
+        <mat-error *ngIf="f.submitted && montant.errors">
+          <div *ngIf="montant.errors['required']">Montant est requis</div>
+          <div *ngIf="montant.errors['pattern']">Montant supérieur à zéro !</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Property ID</b></mat-label>
+        <input matInput type="number" [(ngModel)]="PropertyID" name="Property" #Property="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Property.errors }">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Client ID</b></mat-label>
+        <input matInput type="number" [(ngModel)]="CLientID" name="Client" #Client="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Client.errors }">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Proprietaire ID </b></mat-label>
+        <input matInput type="number" [(ngModel)]="ProprietaireID" name="Proprietaire"  #Proprietaire="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Proprietaire.errors }">
+      </mat-form-field>
+
+      <!-- Display paragraphs to be checked based on contract type -->
+      <div *ngIf="contrat.typeContrat === TypeContrat.Vente">
+        <div class="full-width" style="margin: 20px;">
+          <mat-card>
+            <mat-card-content>
+              <mat-checkbox [(ngModel)]="paragraphs.vente.paragraph1" name="venteParagraph1">
+                <label>Un article de cette promesse doit prévoir une clause qui permet de récupérer toute ou partie des sommes versées lors de la promesse de vente en cas de refus du Gouverneur (Le refus est exceptionnel).</label>
+              </mat-checkbox>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="full-width" style="margin: 20px;">
+          <mat-card>
+            <mat-card-content>
+              <mat-checkbox [(ngModel)]="paragraphs.vente.paragraph2" name="venteParagraph2" required #venteParagraph2="ngModel" [ngClass]="{ 'is-invalid': f.submitted && venteParagraph2.errors }">
+                <label>Le vendeur s'engage dans la promesse de vente à ne pas vendre son bien immobilier à une autre personne que l'acheteur étranger tant que l'autorisation n'est pas délivrée, il va donc perdre des opportunités de vente et il peut demander de garder une somme définie sur l'acompte versé.</label>
+              </mat-checkbox>
+              <mat-error *ngIf="f.submitted && venteParagraph2.errors">
+                <div *ngIf="venteParagraph2.errors['required']">Veuillez cocher cette case</div>
+              </mat-error>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div *ngIf="contrat.typeContrat === 'Location'">
+        <mat-card class="full-width" style="margin: 20px;">
+          <mat-card-content>
+            <mat-checkbox [(ngModel)]="paragraphs.location.paragraph1" name="locationParagraph1">
+              Le propriétaire n'est pas responsable des dommages et pertes causés par l'eau qui s'écoule
+              des toits ou de l'étage supérieur du bâtiment.
+            </mat-checkbox>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="full-width" style="margin: 20px;">
+        <mat-card>
+          <mat-card-content>
+            <mat-checkbox [(ngModel)]="paragraphs.general.paragraph1" name="generalParagraph1" required #generalParagraph1="ngModel" [ngClass]="{ 'is-invalid': f.submitted && generalParagraph1.errors }">
+              <label>Le présent contrat est résilié dès l'expiration de la période imposée, sans préavis de l'une des parties à l'autre.</label>
+            </mat-checkbox>
+            <mat-error *ngIf="f.submitted && generalParagraph1.errors">
+              <div *ngIf="generalParagraph1.errors['required']">Veuillez cocher cette case</div>
+            </mat-error>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="full-width" style="margin: 20px;">
+        <mat-card>
+          <mat-card-content>
+            <mat-checkbox [(ngModel)]="paragraphs.general.paragraph2" name="generalParagraph2" required #generalParagraph2="ngModel" [ngClass]="{ 'is-invalid': f.submitted && generalParagraph2.errors }">
+              <label>Les honoraires des affaires sont à la charge du bénéficiaire, ainsi que toutes les prestations municipales, à l'exception de la prestation de l'employé sur le montant de de l'autorisation imposée au propriétaire.</label>
+            </mat-checkbox>
+            <mat-error *ngIf="f.submitted && generalParagraph2.errors">
+              <div *ngIf="generalParagraph2.errors['required']">Veuillez cocher cette case</div>
+            </mat-error>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <br><br>
+      <br><br>
+
+
+      <div class="button-group" style="margin: 20px;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <mat-label class="checkbox-inline" style="margin-left: 440px ;">
+          <input type="checkbox" id="selectAll" (change)="onSelectChange($event)"> Select All
+        </mat-label>
+      </div>
+
+    </form>
+  </mat-card>
+</div>
+
+
+
+<br><br>
+<br><br>
+

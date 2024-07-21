@@ -1,0 +1,60 @@
+<br>
+<br>
+
+<div class="container">
+
+  <div >
+    <form (ngSubmit)="searchContrat()">
+      <mat-form-field class="col-md-6 inline">
+        <input matInput [(ngModel)]="EnteredID" type="text" id="id" name="id" placeholder="Search by ID">
+        <mat-error *ngIf="EnteredID && EnteredID < 3">
+          Please enter ID
+        </mat-error>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!EnteredID ">
+          Search
+        </button>
+      </mat-form-field>
+    </form>
+
+  </div>
+  <br>
+  <br>
+  <div>
+    <table style="margin-bottom: 50px;" class=" table table-responsive table-striped  border-dark">
+
+      <thead class="table-dark ">
+      <tr>
+        <th>Id</th>
+        <th>IdAgent</th>
+        <th>Montant</th>
+        <th>Date Debut</th>
+        <th>Date Fin</th>
+        <th>TypeContrat</th>
+        <th>Actions</th>
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+      <tr *ngFor = "let contrat of contrats">
+        <td>{{contrat.id}}</td>
+        <td>{{contrat.createdBy}}</td>
+        <td>{{contrat.montant}}</td>
+        <td>{{contrat.dateDebut}}</td>
+        <td>{{contrat.dateFin}}</td>
+        <td>{{contrat.typeContrat}}</td>
+        <td>
+          <button (click) = "updateContrat(contrat.id)" class = "btn  btn-secondary btn-sm"> Update</button>
+          <button (click) = "deleteContrat(contrat.id)" class = "btn btn-danger btn-sm" style="margin-left: 10px"> Delete</button>
+          <button (click) = "detailsOfContrat(contrat.id)" class = "btn btn-success btn-sm " style="margin-left: 10px"> View</button >
+        <button (click) = " detailsOfContrat(contrat.id)" class = "btn btn-primary btn-sm " style="margin-left: 10px"> Download</button>
+        </td>
+      </tr>
+      </tbody>
+
+
+    </table>
+    <br><br><br><br>
+  </div>
+

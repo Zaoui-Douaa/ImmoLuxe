@@ -1,0 +1,109 @@
+<section id="skills" class="section-2 odd highlights image-right counter skills featured">
+  <br><br>
+  <div class="container">
+      <h1 class="mt-4 mb-4">Real Estate Listings</h1>
+      <div class="row">
+          <div class="column" *ngFor="let property of properties">
+              <div class="card">
+                  <img src="https://africamodul.com/wp-content/uploads/2019/05/maisons_prefabriquees_2_87m2.jpg" alt="Property Image" style="width:100%">
+                  <div class="container">
+                      <h2>{{property.type}}</h2>
+                      <p>
+                          Address: {{property.address}} <br>
+                          Price: {{property.price}} <br>
+                          Bedrooms: {{property.bedrooms}} <br>
+                          Bathrooms: {{property.bathrooms}} <br>
+                          Area: {{property.area}} sqft <br>
+                          Description: {{property.description}}
+                      </p>
+                      <p><button (click)="detailsOfProperty(property.id)" class="button">View Listing</button></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="divMain container">
+      <div class="container c1 text">
+          <h1 class="text">Technology Stack Used:</h1>
+          <br>
+          <ul class="category" id="t1">
+              <li>Backend Technology
+                  <ul class="subcategory">
+                      <li>Java</li>
+                      <li>Spring Boot</li>
+                  </ul>
+              </li>
+              <li>Frontend Technology
+                  <ul class="subcategory">
+                      <li>Angular</li>
+                  </ul>
+              </li>
+              <li>Database Technology
+                  <ul class="subcategory">
+                      <li>MySQL</li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+      <div class="image">
+          <img src="../assets/about-5.webp" class="fit-image" alt="Fit Image">
+      </div>
+  </div>
+  <br><br>
+</section>
+
+<section class="about">
+  <br><br>
+  <div class="container">
+      <div class="about-section">
+          <h1>About Us</h1>
+          <br>
+          <p>Explore a wide range of real estate properties through our platform. We provide detailed information to help you make informed decisions when buying, selling, or renting properties.</p>
+      </div>
+      <br><br>
+      <h2 style="text-align:center">Our Team</h2>
+      <br><br>
+      <div class="row">
+          <div class="column">
+              <div class="card">
+                  <img src="../assets/team1.jpg" alt="Jane" style="width:100%">
+                  <div class="container">
+                      <h2>Jane Doe</h2>
+                      <p class="title">CEO & Founder</p>
+                      <p>Jane has extensive experience in the real estate market and is dedicated to providing the best service to our clients.</p>
+                      <p>jane@example.com</p>
+                      <p><button class="button">Contact</button></p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="column">
+              <div class="card">
+                  <img src="../assets/team2.jpg" alt="Mike" style="width:100%">
+                  <div class="container">
+                      <h2>Mike Ross</h2>
+                      <p class="title">Sales Director</p>
+                      <p>Mike specializes in property sales and is committed to finding the perfect property for every client.</p>
+                      <p>mike@example.com</p>
+                      <p><button class="button">Contact</button></p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="column">
+              <div class="card">
+                  <img src="../assets/team3.jpg" alt="John" style="width:100%">
+                  <div class="container">
+                      <h2>John Doe</h2>
+                      <p class="title">Marketing Manager</p>
+                      <p>John leads our marketing efforts, ensuring our listings reach a wide audience of potential buyers and sellers.</p>
+                      <p>john@example.com</p>
+                      <p><button class="button">Contact</button></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br><br><br><br><br>
+</section>

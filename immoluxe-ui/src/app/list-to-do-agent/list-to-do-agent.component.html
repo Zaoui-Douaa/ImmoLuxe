@@ -1,0 +1,40 @@
+<br>
+<br>
+
+<div class="container">
+
+  <br>
+  <br>
+  <div>
+    <table style="margin-bottom: 50px;" class="table table-responsive table-striped  border-dark">
+      <thead class="table-dark">
+      <tr>
+        <th>Id Property</th>
+        <th>Id Client</th>
+        <th>Id Proprietaire</th>
+        <th>Contrat Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let property of properties">
+        <tr *ngIf="getContratType(property.description)== TypeContrat.Vente || getContratType(property.description)== TypeContrat.Location">
+          <td>{{ property.id }}</td>
+          <td>
+            {{ getClientIds(clients, Role.Client) }}
+          </td>
+          <td>
+            {{ getClientIds(clients, Role.Proprietaire) }}
+          </td>
+          <td>
+            {{ getContratType(property.description)}}
+          </td>
+          <td>
+            <button (click)="createContrat(property)" class="btn btn-secondary btn-sm"> Crée Contrat</button>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    <br><br><br><br>
+  </div>
+

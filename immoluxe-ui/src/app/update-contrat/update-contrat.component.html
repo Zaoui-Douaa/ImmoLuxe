@@ -1,0 +1,53 @@
+<br><br><br><br>
+<div class="container-sm">
+  <mat-form-field class="col-md-6 offset-md-3">
+
+    <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="row g-3 form-container  container-sm ">
+
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Montant</b></mat-label>
+        <input matInput type="number" [(ngModel)]="contrat.montant" name="montant"  pattern="[1-9][0-9]*" #montant="ngModel" [ngClass]="{ 'is-invalid': f.submitted && montant.errors }">
+        <mat-error *ngIf="f.submitted && montant.errors">
+          <div *ngIf="montant.errors['required']">Montant est requis</div>
+          <div *ngIf="montant.errors['pattern']">Montant supérieur à zéro !</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label><b>Date Début</b></mat-label>
+        <input matInput [matDatepicker]="dateDebutPicker" [(ngModel)]="contrat.dateDebut" name="dateDebut"  #dateDebut="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dateDebut.errors }">
+        <mat-datepicker-toggle matSuffix [for]="dateDebutPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateDebutPicker></mat-datepicker>
+      </mat-form-field>
+
+        <div *ngIf="contrat.typeContrat === TypeContrat.Location">
+
+          <mat-form-field class="full-width" style="margin: 20px;">
+            <mat-label><b>Date Fin</b></mat-label>
+            <input matInput [matDatepicker]="dateFinPicker"  [(ngModel)]="contrat.dateFin" name="dateFin"   #dateFin="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dateFin.errors }" [min]="contrat.dateDebut">
+            <mat-datepicker-toggle matSuffix [for]="dateFinPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateFinPicker></mat-datepicker>
+            <mat-error *ngIf="f.submitted && dateFin.errors" >
+              <div *ngIf="dateFin.value <= dateDebut.value">Date Fin aprés Date Début !</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+
+      <br><br><br><br>
+
+      <div class="form-group col-md-6">
+        <button class="btn btn-success full-width-button" type="submit">Submit</button>
+      </div>
+
+      <div class="col-md-6">
+        <button type="button" (click)="goToContratList()"
+                class="btn btn-danger full-width-button">Cancel</button>
+      </div>
+
+    </form>
+
+  </mat-form-field>
+</div>

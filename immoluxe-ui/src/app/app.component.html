@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-sm border-bottom border-body" data-bs-theme="dark">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a routerLink="home" routerLinkActive="active" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="show-all-properties" routerLinkActive="active" class="nav-link">Property List</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="add-properties" routerLinkActive="active" class="nav-link">Add Property</a>
+        </li>
+      <li class="nav-item">
+            <a routerLink="ListToDoAgent" routerLinkActive="active" class="nav-link">To Do</a>
+        </li>
+      <li class="nav-item">
+        <a routerLink="show-all-contrats" routerLinkActive="active" class="nav-link">Contrat List</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="add-contrat" routerLinkActive="active" class="nav-link">Add Contrat</a>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="statcontrat" routerLinkActive="active" class="nav-link">Contrat Stat</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item" style="margin-right: 4rem;">
+            <a routerLink="login" routerLinkActive="active" class="nav-link">Admin Login
+                <span  class="logout-option" id="logoutOption"><a routerLink="" (click)="onLogout()"  routerLinkActive="active" class="nav-link">Logout</a></span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<script>
+        // Add an event listener to the link element
+        document.getElementById('loginLink').addEventListener('mouseover', function () {
+            // Change the content of the logout option
+            document.getElementById('logoutOption').innerText = 'Logout Option';
+        });
+
+        // Reset the content when the mouse leaves the link
+        document.getElementById('loginLink').addEventListener('mouseout', function () {
+            document.getElementById('logoutOption').innerText = 'Logout';
+        });
+    </script>
+
+
+<!-- <div class="container"> -->
+
+    <router-outlet></router-outlet>
+<!-- </div> -->
+
+
+<footer class = "footer">
+    <div class = "container">
+        <span>ImmoLuxe</span>
+    </div>
+</footer>
+

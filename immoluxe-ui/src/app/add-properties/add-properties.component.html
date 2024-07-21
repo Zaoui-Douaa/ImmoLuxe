@@ -1,0 +1,72 @@
+<div>
+  <mat-card class="col-md-6 offset-md-3">
+    <mat-card-header>
+      <mat-card-title><h3>Property Form</h3></mat-card-title>
+    </mat-card-header>
+    <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="property.type" name="type" required #type="ngModel" [ngClass]="{ 'is-invalid': f.submitted && type.errors }">
+          <mat-option value="" disabled>Choose...</mat-option>
+          <mat-option value="House">House</mat-option>
+          <mat-option value="Apartment">Apartment</mat-option>
+          <mat-option value="Condo">Condo</mat-option>
+          <mat-option value="Townhouse">Townhouse</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.submitted && type.errors?.['required']">Type is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Bedrooms</mat-label>
+        <mat-select [(ngModel)]="property.bedrooms" name="bedrooms" required #bedrooms="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bedrooms.errors }">
+          <mat-option value="" disabled>Choose...</mat-option>
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5+">5+</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.submitted && bedrooms.errors?.['required']">Number of bedrooms is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" [(ngModel)]="property.address" name="address" required #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.errors }">
+        <mat-error *ngIf="f.submitted && address.errors?.['required']">Address is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" [(ngModel)]="property.price" name="price" required #price="ngModel" [ngClass]="{ 'is-invalid': f.submitted && price.errors }">
+        <mat-error *ngIf="f.submitted && price.errors?.['required']">Price is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Bathrooms</mat-label>
+        <input matInput type="number" [(ngModel)]="property.bathrooms" name="bathrooms" required #bathrooms="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bathrooms.errors }">
+        <mat-error *ngIf="f.submitted && bathrooms.errors?.['required']">Number of bathrooms is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Area (sq ft)</mat-label>
+        <input matInput type="number" [(ngModel)]="property.area" name="area" required #area="ngModel" [ngClass]="{ 'is-invalid': f.submitted && area.errors }">
+        <mat-error *ngIf="f.submitted && area.errors?.['required']">Area is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" style="margin: 20px;">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="property.description" name="description" required #description="ngModel" [ngClass]="{ 'is-invalid': f.submitted && description.errors }"></textarea>
+        <mat-error *ngIf="f.submitted && description.errors?.['required']">Description is required</mat-error>
+      </mat-form-field>
+
+      <div class="full-width" style="margin: 20px;">
+        <input type="file" (change)="onFileSelected($event)">
+      </div>
+
+      <div class="button-group" style="margin: 20px;">
+        <button mat-raised-button color="primary" type="submit" style="margin: 20px;">Submit</button>
+        <button mat-raised-button color="warn" type="button" (click)="onCancel()" style="margin: 20px;">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

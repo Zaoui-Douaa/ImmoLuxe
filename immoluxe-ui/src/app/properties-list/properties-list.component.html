@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Listing</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .property-card {
+            margin-bottom: 20px;
+        }
+        .mat-card-title {
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .mat-card-content {
+            color: #6c757d;
+        }
+        .mat-card-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .property-image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Property Listing</h1>
+        <div class="row">
+            <div class="col-md-4 property-card" *ngFor="let property of properties">
+                <mat-card>
+                    <img mat-card-image     src="https://africamodul.com/wp-content/uploads/2019/05/maisons_prefabriquees_2_87m2.jpg" alt="Property Image" class="property-image">
+                    <mat-card-header>
+                        <mat-card-title>{{property.address}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            <strong>Type:</strong> {{property.type}} <br>
+                            <strong>Price:</strong> {{property.price}} <br>
+                            <strong>Bedrooms:</strong> {{property.bedrooms}} <br>
+                            <strong>Bathrooms:</strong> {{property.bathrooms}} <br>
+                            <strong>Area:</strong> {{property.area}} <br>
+                            <strong>Description:</strong> {{property.description}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="updateProperty(property.id)" style="margin: 5px;">
+                            <mat-icon>edit</mat-icon> Update
+                        </button>
+                        <button mat-raised-button color="warn" (click)="deleteProperty(property.id)" style="margin: 5px;">
+                            <mat-icon>delete</mat-icon> Delete
+                        </button>
+                        <button mat-raised-button color="accent" (click)="detailsOfProperty(property.id)" style="margin: 5px;">
+                            <mat-icon>visibility</mat-icon> View
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

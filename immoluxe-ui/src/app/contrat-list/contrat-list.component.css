@@ -1,0 +1,22 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.property-card {
+  margin-bottom: 20px;
+}
+.mat-card-title {
+  color: #007BFF;
+  font-weight: bold;
+}
+.mat-card-content {
+  color: #6c757d;
+}
+.mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.property-image {
+  width: 100%;
+  height: auto;
+}
